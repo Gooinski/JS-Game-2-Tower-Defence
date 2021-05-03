@@ -1,5 +1,5 @@
 body {
-    background: black;
+    background: #383c66;
 }
 #canvas1 {
     position: absolute;
@@ -8,5 +8,6 @@ body {
     transform: translate(-50%, -50%);
     width: 900px;
     height: 600px;
-    background: white;
+    background: #3b514c;
+    font-family: 'Orbitron', sans-serif;
 }
