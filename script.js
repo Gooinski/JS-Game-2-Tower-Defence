@@ -179,6 +179,43 @@ function handleDefenders() {
     }
 }
 
+// floating messages
+const floatingMessages = [];
+class floatingMessage {
+    constructor(value, x, y, size, color) {
+        this.value = value;
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.lifespan = 0;
+        this.color = color;
+        this.opacity = 1;
+    }
+    update() {
+        this.y -= 0.3;
+        this.lifespan += 1;
+        if (this.opacity > 0.01) this.opacity -= 0.01;
+
+    }
+    draw() {
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+        ctx.font = this.size + 'px Orbitron';
+        ctx.fillText(this.value, thix.x, this.y);
+        ctx.globalAlpha = 1;
+    }
+}
+function handleFloatingMessages() {
+    for (let i = 0; i < floatingMessages.length; i++) {
+        floatingMessages[i].update();
+        floatingMessages[i].draw();
+        if (floatingMessages[i].lifespan >= 50) {
+            floatingMessages.splice(i, 1);
+            i--;
+        }
+    }
+}
+
 // enemies
 class Enemy {
     constructor(verticalPosition) {
@@ -230,7 +267,7 @@ function handleEnemies() {
 }
 
 // resources
-const amounts = [20, 30, 40];
+const amounts = [40, 60, 80];
 class Resource {
     constructor() {
         this.x = Math.random() * (canvas.width - cellSize);
